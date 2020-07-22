@@ -9,6 +9,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
+/**
+ * Alza home page
+ */
 public class HomePage {
 
     private WebDriver driver;
@@ -37,12 +40,19 @@ public class HomePage {
     }
 
     // Functions
+
+    /**
+     * Check the page for all required elements to be present.
+     */
     private void checkPage() {
         Assert.assertTrue("Title not matched.", driver.getTitle().contains("Alza"));
         Assert.assertTrue("Logo is not present",logo.findElement(By.xpath("./a")).getAttribute("title").contains("Alza.cz"));
     }
 
     // PageFragments functions
+    /**
+     * @return Main Alza menu
+     */
     public MainMenu getMainMenu() {
         return mainMenu;
     }

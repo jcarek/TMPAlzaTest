@@ -15,6 +15,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Test the Alza eshop
+ */
 @RunAsClient
 public class TestAlza extends Arquillian {
 
@@ -24,6 +27,9 @@ public class TestAlza extends Arquillian {
     @Page
     HomePage homePage;
 
+    /**
+     * Set browser before all tests
+     */
     @Before
     public void setup(){
         ChromeDriverManager.getInstance().setup();
@@ -31,6 +37,10 @@ public class TestAlza extends Arquillian {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
+    /**
+     * Search for the two most expensive electric cars
+     * and add them to cart
+     */
     @Test
     public void SearchTwoMostExpensive () {
         homePage = new HomePage(driver);
@@ -45,9 +55,12 @@ public class TestAlza extends Arquillian {
                 .addMostExpensive(2);
     }
 
+    /**
+     * close the browser after each test
+     */
     @After
     public void close(){
-        //driver.close();
+        driver.close();
     }
 
 }

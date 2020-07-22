@@ -8,6 +8,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
+/**
+ * Alza main menu containing links to basic categories and searching
+ */
 public class MainMenu {
 
     private WebDriver driver;
@@ -32,10 +35,17 @@ public class MainMenu {
     }
 
     // Functions
+
+    /**
+     * Check the page for all required elements to be present.
+     */
     private void checkPage() {
         Assert.assertTrue("Auto link is not present",auto.isDisplayed());
     }
 
+    /**
+     * @return Cars category page
+     */
     public CarsPage goToAuto() {
         System.out.println("Clicking on Auto");
         auto.click();

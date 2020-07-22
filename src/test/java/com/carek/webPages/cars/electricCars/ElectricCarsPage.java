@@ -11,14 +11,23 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
+/**
+ * Category of electric cars
+ */
 public class ElectricCarsPage {
 
     private WebDriver driver;
 
     //Locators
+    /**
+     * Sort button by price desc
+     */
     @FindBy(id = "ui-id-3")
     private WebElement sortByPriceDesc;
 
+    /**
+     * Div container including all items on page
+     */
     @FindBy(id = "boxes")
     private WebElement containerOfBoxes;
 
@@ -39,15 +48,26 @@ public class ElectricCarsPage {
     }
 
     // Functions
+
+    /**
+     * Check the page for all required elements to be present.
+     */
     private void checkPage() {
         Assert.assertTrue("Sorting Desc button not displayed.",sortByPriceDesc.isDisplayed());
     }
 
+    /**
+     * @return refreshed page after sorted products by price desc
+     */
     public ElectricCarsPage sortByPriceDesc() {
         sortByPriceDesc.click();
         return this;
     }
 
+    /**
+     * Write to console some first items
+     * @param numberOfItems How many first items to write down to console
+     */
     public void writeDownFirstItems(int numberOfItems) {
         System.out.println("First "+numberOfItems+" items");
         List<WebElement> boxes = containerOfBoxes.findElements(By.xpath("./div[contains(@class,'box')]"));
@@ -62,34 +82,38 @@ public class ElectricCarsPage {
         }
     }
 
+    /**
+     * Add the n-th most expensive item on page to cart
+     * @param order Order of item on page to add to cart sorted by price desc
+     * @return Webpage of added item
+     */
     public AddedItemPage addMostExpensive(int order) {
         List<WebElement> boxes = containerOfBoxes.findElements(By.xpath("./div[contains(@class,'box') and descendant::span[contains(@class,'c2')]]"));
 
-        Integer price1 = 0;
-        Integer price2 = 0;
+        int price1 = 0;
+        int price2 = 0;
         WebElement element1 = null;
         WebElement element2 = null;
         // Sorry, short of time.
 
-        for (int i = 0; i < boxes.size(); i++) {
-            String name = boxes.get(i).findElement(By.xpath(".//a[contains(@class,'name')]")).getText();
-            String priceString = boxes.get(i).findElement(By.xpath(".//span[contains(@class,'c2')]")).getText().replaceAll("[^0-9]","");
-            Integer price = Integer.valueOf(priceString);
+        for (WebElement box : boxes) {
+            String name = box.findElement(By.xpath(".//a[contains(@class,'name')]")).getText();
+            String priceString = box.findElement(By.xpath(".//span[contains(@class,'c2')]")).getText().replaceAll("[^0-9]", "");
+            int price = Integer.parseInt(priceString);
             System.out.println("Name: " + name + " ; Price: " + price);
 
-            if(price > price1) {
+            if (price > price1) {
                 if (price1 > price2) {
                     price2 = price1;
                     element2 = element1;
                 }
                 price1 = price;
-                element1 = boxes.get(i);
-            }
-            else if (price > price2) {
+                element1 = box;
+            } else if (price > price2) {
                 price2 = price;
-                element2 = boxes.get(i);
+                element2 = box;
             }
-         }
+        }
 
         if (order == 1) {
             element1.findElement(By.xpath(".//a[@class='btnk1']")).click();
@@ -102,6 +126,9 @@ public class ElectricCarsPage {
         return addedItemPage;
     }
 
+    /**
+     * @return Main Alza menu
+     */
     // PageFragments functions
     public MainMenu getMainMenu() {
         return mainMenu;

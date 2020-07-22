@@ -10,6 +10,9 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
+/**
+ * Page with the item added to cart
+ */
 public class AddedItemPage {
 
     private WebDriver driver;
@@ -32,11 +35,18 @@ public class AddedItemPage {
     }
 
     // Functions
+
+    /**
+     * Check the page for all required elements to be present.
+     */
     private void checkPage() {
 
     }
 
     // PageFragments functions
+    /**
+     * @return Main Alza menu
+     */
     public MainMenu getMainMenu() {
         return mainMenu;
     }

@@ -15,12 +15,25 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Basic tests of counting
+ */
 public class TestCountAndWrite {
 
+    /**
+     * setup before each test
+     */
     @Before
     public void setup(){
     }
 
+    /**
+     * counts backwards from 100 to 1 and prints:
+     *      “Agile” if the number is divisible by 5,
+     *      “Software” if the number is divisible by 3,
+     *      “Testing” if the number is divisible by both,
+     *      or prints just the number if none of those cases are true
+     */
     @Test
     public void CountAndWrite () {
         for (int number = 100; number >= 1; number--) {
@@ -33,6 +46,9 @@ public class TestCountAndWrite {
         }
     }
 
+    /**
+     * setup after each test
+     */
     @After
     public void close(){
 

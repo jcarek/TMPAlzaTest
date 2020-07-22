@@ -8,6 +8,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+/**
+ * Cars category page
+ */
 public class CarsPage {
 
     private WebDriver driver;
@@ -33,10 +36,18 @@ public class CarsPage {
     }
 
     // Functions
+
+    /**
+     * Check the page for all required elements to be present.
+     */
     private void checkPage() {
         Assert.assertTrue("Electric cars button not displayed.",electricCars.isDisplayed());
     }
 
+    /**
+     * Go to the electric cars category
+     * @return Page with category of electric cars
+     */
     public ElectricCarsPage goToElectricCars() {
         electricCars.click();
         electricCarsPage = new ElectricCarsPage(driver);
@@ -44,6 +55,9 @@ public class CarsPage {
     }
 
     // PageFragments functions
+    /**
+     * @return Main Alza menu
+     */
     public MainMenu getMainMenu() {
         return mainMenu;
     }
